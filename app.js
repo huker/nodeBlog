@@ -5,8 +5,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
+//路由
 var routes = require('./routes/index');
 var users = require('./routes/users');
+var articles = require('./routes/articles');
 
 var app = express();
 
@@ -25,6 +27,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 //路由实例
 app.use('/', routes);
 app.use('/users', users);
+app.use('/articles', articles);
 
 //线性执行 上面全没找到的话　就捕获404
 // catch 404 and forward to error handler
@@ -48,8 +51,11 @@ if (app.get('env') === 'development') {
   });
 }
 
+//没有next 所以不接着执行
+
 // production error handler 生产环境中的错误处理
 // no stacktraces leaked to user 不把堆栈信息暴露给用户
+
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
