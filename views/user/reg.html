@@ -1,13 +1,13 @@
 <%- include ../include/header.html %>
 
-<form>
+<form method="post" action="/users/reg">
     <div class="form-group">
         <label for="username">用户名</label>
-        <input type="email" class="form-control" id="username" placeholder="用户名">
+        <input type="text" class="form-control" id="username" name="username" placeholder="用户名">
     </div>
     <div class="form-group">
         <label for="password">密码</label>
-        <input type="password" class="form-control" id="password" placeholder="密码">
+        <input type="password" class="form-control" id="password" name="password" placeholder="密码">
     </div>
     <!--<div class="form-group">-->
         <!--<label for="exampleInputFile">File input</label>-->

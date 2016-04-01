@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var userModel=require('../model/user');
 
 //注册 这里的'/'是当前路由下的根目录 '/users'
 router.get('/reg',function(req,res){
@@ -7,7 +8,15 @@ router.get('/reg',function(req,res){
 });
 //提交用户注册的表单到服务器
 router.post('/reg',function(req,res){
-  res.send('reg');
+  var user=req.body;
+  userModel.create(user,function(err,doc){
+    if(err){
+      //返回到上一个页面
+      res.redirect('back');
+    }else{
+      res.redirect('/')
+    }
+  });
 });
 
 //登录
