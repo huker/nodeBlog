@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session=require('express-session');
+var MongoStore=require('connect-mongo/es5')(session);
 
 //路由
 var routes = require('./routes/index');
@@ -17,6 +19,16 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 //对html文件 渲染的时候委托ejs渲染方式渲染
 app.engine('html',require('ejs').renderFile);
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://127.0.0.1:27017/nodeBlog');
+//使用了会话中间件后 req多了一个session的属性
+app.use(session({
+  secret:'nodeBlog',
+  resave:false,
+  saveUninitialized:true,
+  //指定保存的位置
+  store: new MongoStore({mongooseConnection:mongoose.connection})
+}));
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -25,6 +37,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+//配置模板中间件
+app.use(function(req,res,next){
+  res.locals.user=req.session.user;
+  next();
+});
 
 //路由实例
 app.use('/', routes);
