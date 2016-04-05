@@ -43,20 +43,21 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
 app.use(function(req,res,next){
   res.locals.user=req.session.user;
   //获取的是个数组 所以页面提示会一直出现 转成string
   res.locals.success=req.flash('success').toString();
   res.locals.error=req.flash('error').toString();
+  console.log(res.locals);
   next();
 });
+
 
 //路由实例
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles', articles);
-
-
 
 //线性执行 上面全没找到的话　就捕获404
 // catch 404 and forward to error handler
@@ -67,7 +68,6 @@ app.use(function(req, res, next) {
 });
 
 // 错误处理
-
 // development error handler 开发环境的错误处理
 // will print stacktrace 打印出错误的调用堆栈
 if (app.get('env') === 'development') {
@@ -92,6 +92,5 @@ app.use(function(err, req, res, next) {
     error: {}
   });
 });
-
 
 module.exports = app;
