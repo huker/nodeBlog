@@ -4,31 +4,36 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var session=require('express-session');
-var MongoStore=require('connect-mongo/es5')(session);
 
 //路由
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
+var session=require('express-session');
+var MongoStore=require('connect-mongo')(session);
+var flash = require('connect-flash');
 
 var app = express();
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'html');
 //对html文件 渲染的时候委托ejs渲染方式渲染
 app.engine('html',require('ejs').renderFile);
-var mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/nodeBlog');
-//使用了会话中间件后 req多了一个session的属性
+
 app.use(session({
-  secret:'nodeBlog',
-  resave:false,
-  saveUninitialized:true,
-  //指定保存的位置
-  store: new MongoStore({mongooseConnection:mongoose.connection})
+  secret: 'nodeBlog',
+  resave: false,
+  saveUninitialized: true,
+  //把会话信息存储到数据库中，以避免重启服务器时会话丢失
+  store:new MongoStore({
+    db:'nodeBlog',
+    host:'http://127.0.0.1',
+    port:27017,
+    url:'mongodb://127.0.0.1:27017/nodeBlog'
+  })
 }));
+//依赖session的
+app.use(flash());
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
@@ -37,7 +42,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-//配置模板中间件
+
 app.use(function(req,res,next){
   res.locals.user=req.session.user;
   next();
@@ -47,6 +52,8 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles', articles);
+
+
 
 //线性执行 上面全没找到的话　就捕获404
 // catch 404 and forward to error handler
