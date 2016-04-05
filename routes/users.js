@@ -11,10 +11,12 @@ router.post('/reg',function(req,res){
   var user=req.body;
   userModel.create(user,function(err,doc){
     if(err){
+      req.flash('error',err);
       //返回到上一个页面
       res.redirect('back');
     }else{
       req.session.user=doc;
+      req.flash('success','注册成功!');
       res.redirect('/')
     }
   });

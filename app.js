@@ -45,6 +45,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(function(req,res,next){
   res.locals.user=req.session.user;
+  //获取的是个数组 所以页面提示会一直出现 转成string
+  res.locals.success=req.flash('success').toString();
+  res.locals.error=req.flash('error').toString();
   next();
 });
 
