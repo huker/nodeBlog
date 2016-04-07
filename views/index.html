@@ -1,17 +1,26 @@
 <%- include include/header.html %>
 
 <ul class="media-list">
+
+    <%
+    for(var i=0;i<articles.length;i++){
+    var article=articles[i];
+    %>
     <li class="media">
         <div class="media-left">
             <a href="#">
-                <img class="media-object" src="..." alt="...">
+                <img class="media-object" src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
             </a>
         </div>
         <div class="media-body">
-            <h4 class="media-heading">Media heading</h4>
-            ...
+            <h4 class="media-heading"><%=article.title%></h4>
+            <p><%=article.content%></p>
         </div>
     </li>
+    <%
+    }
+    %>
+
 </ul>
 
 <%- include include/footer.html %>

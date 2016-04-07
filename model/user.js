@@ -4,7 +4,8 @@ mongoose.connect('mongodb://127.0.0.1:27017/nodeBlog');
 var userSchema = new mongoose.Schema({
     username:String,
     password:String,
-    email:String
+    email:String,
+    avatar:String
 });
 //定义model
 var userModel = mongoose.model('user',userSchema);

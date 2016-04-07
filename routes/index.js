@@ -1,11 +1,20 @@
 var express = require('express');
 var router = express.Router();
-
+var articleModel=require('../model/article.js');
 //一个路由实例
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', {});
+  //执行 这里取到的user是id 要用populate转
+  articleModel.find().populate('user').exec(function(err,articles){
+    if(err){
+      req.flash('error',err);
+      return res.redirect('/');
+    }else{
+      res.render('index', {articles:articles});
+    }
+  });
+
 });
 
 module.exports = router;
