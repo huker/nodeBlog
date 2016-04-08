@@ -7,6 +7,7 @@ var mongoose = require('mongoose');
 var articleSchema = new mongoose.Schema({
     title:String,
     content:String,
+    img:String,
     //类型是主键类型 引用的是user
     user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
     creatAt:{type:Date,default:Date.now}

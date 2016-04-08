@@ -1,6 +1,6 @@
 <%- include ../include/header.html %>
 
-<form method="post" action="/articles/add">
+<form method="post" action="/articles/add" enctype="multipart/form-data">
     <div class="form-group">
         <label for="title">标题</label>
         <input type="text" class="form-control" id="title" name="title" placeholder="标题">
@@ -9,6 +9,10 @@
         <label for="content">内容</label>
         <textarea class="form-control" name="content" id="content" cols="30" rows="10">
         </textarea>
+    </div>
+    <div class="form-group">
+        <label for="img">图片</label>
+        <input class="form-control" type="file" id="img" name="img"/>
     </div>
     <button type="submit" class="btn btn-default">发表</button>
 </form>
