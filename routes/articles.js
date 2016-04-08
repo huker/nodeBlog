@@ -41,4 +41,31 @@ router.post('/add',upload.single('img'),function(req,res){
         }
     });
 });
+
+//详情文章页面
+router.get('/detail/:_id',function(req,res){
+    articleModel.findById(req.params._id,function(err,article) {
+        if (err) {
+            req.flash('error', err);
+            res.redirect('back')
+        }
+        else {
+            res.render('article/detail', {article: article});
+        }
+    })
+});
+
+//删除文章
+router.get('/delete/:_id',function(req,res){
+    articleModel.remove({_id:req.params._id},function(err,result){
+        if(err){
+            req.flash('error','文章删除失败');
+            res.redirect('back')
+        }else{
+            req.flash('success','文章删除成功');
+            res.redirect('/');
+        }
+    })
+});
+
 module.exports=router;
