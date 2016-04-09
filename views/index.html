@@ -29,10 +29,11 @@
     </div>
     <div class="col-md-4">
         <ul class="list-group">
+            <li class="list-group-item">文章列表 <span class="badge"><%=articles.length%></span></li>
             <%for(var i=0;i<articles.length;i++){
             var article=articles[i];
             %>
-            <li class="list-group-item"><%=article.title%></li>
+            <li class="list-group-item"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></li>
             <%
             }%>
         </ul>

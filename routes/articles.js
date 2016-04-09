@@ -5,6 +5,7 @@ var express = require('express');
 var articleModel=require('../model/article.js');
 var router=express.Router();
 var multer=require('multer');
+var validate=require('../middle/index.js');
 
 //指定文件元素的存储方式
 var storage = multer.diskStorage({
@@ -18,12 +19,12 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-router.get('/add',function(req,res){
+router.get('/add',validate.checkLogin,function(req,res){
     //新建 所以是{} 否则会报错
     res.render('article/add',{article:{}});
 });
 
-router.post('/add',upload.single('img'),function(req,res){
+router.post('/add',validate.checkLogin,upload.single('img'),function(req,res){
     var article=req.body;
     if(req.file){
         article.img='/images/'+req.file.filename;
@@ -44,7 +45,7 @@ router.post('/add',upload.single('img'),function(req,res){
 });
 
 //详情文章页面
-router.get('/detail/:_id',function(req,res){
+router.get('/detail/:_id',validate.checkLogin,function(req,res){
     articleModel.findById(req.params._id,function(err,article) {
         if (err) {
             req.flash('error', err);
@@ -57,7 +58,7 @@ router.get('/detail/:_id',function(req,res){
 });
 
 //删除文章
-router.get('/delete/:_id',function(req,res){
+router.get('/delete/:_id',validate.checkLogin,function(req,res){
     articleModel.remove({_id:req.params._id},function(err,result){
         if(err){
             req.flash('error','文章删除失败');
@@ -70,13 +71,13 @@ router.get('/delete/:_id',function(req,res){
 });
 
 //修改文章
-router.get('/update/:_id',function(req,res){
+router.get('/update/:_id',validate.checkLogin,function(req,res){
     articleModel.findById(req.params._id,function(err,article){
         res.render('article/update',{article:article})
     })
 });
 
-router.post('/update/:_id',upload.single('img'),function(req,res){
+router.post('/update/:_id',upload.single('img'),validate.checkLogin,function(req,res){
     var article=req.body;
     console.error(article);
     //要改变的值
