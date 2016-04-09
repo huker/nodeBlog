@@ -18,47 +18,28 @@ var storage = multer.diskStorage({
 });
 var upload = multer({ storage: storage });
 
-
 router.get('/add',function(req,res){
+    //新建 所以是{} 否则会报错
     res.render('article/add',{article:{}});
 });
 
 router.post('/add',upload.single('img'),function(req,res){
     var article=req.body;
-    //是否有id 有的话就是更新页面
-    var _id=article._id;
-    if(_id){
-        //要改变的值
-        var set={title:article.title,content:article.content};
-        if(req.file){
-            set.img='/images/'+req.file.filename;
-        }
-        articleModel.update({_id:article._id},{$set:set},function(err,article){
-            if(err){
-                req.flash('error','更新文章失败');
-                res.redirect('back')
-            }else{
-                req.flash('success','更新文章成功');
-                res.redirect('/');
-            }
-        })
-    }else{
-        var user=req.session.user;
-        article.user=user;
-        if(req.file){
-            //拼路径
-            article.img='/images/'+req.file.filename;
-        }
-        articleModel.create(article,function(err,article){
-            if(err){
-                req.flash('error','文章发表失败');
-                res.redirect('back');
-            }else{
-                req.flash('success','文章发表成功');
-                return res.redirect('/');
-            }
-        });
+    if(req.file){
+        article.img='/images/'+req.file.filename;
     }
+    var user=req.session.user;
+    article.user=user;
+    articleModel.create(article,function(err,article){
+        //console.error(article);
+        if(err){
+            req.flash('error','文章发表失败');
+            res.redirect('back');
+        }else{
+            req.flash('success','文章发表成功');
+            return res.redirect('/');
+        }
+    });
 
 });
 
@@ -91,8 +72,26 @@ router.get('/delete/:_id',function(req,res){
 //修改文章
 router.get('/update/:_id',function(req,res){
     articleModel.findById(req.params._id,function(err,article){
-        res.render('article/add',{article:article})
+        res.render('article/update',{article:article})
     })
 });
 
+router.post('/update/:_id',upload.single('img'),function(req,res){
+    var article=req.body;
+    console.error(article);
+    //要改变的值
+    var set={title:article.title,content:article.content};
+    if(req.file){
+        set.img='/images/'+req.file.filename;
+    }
+    articleModel.update({_id: req.params._id},{$set:set},function(err,article){
+        if(err){
+            req.flash('error','更新文章失败');
+            res.redirect('back')
+        }else{
+            req.flash('success','更新文章成功');
+            res.redirect('/');
+        }
+    })
+});
 module.exports=router;

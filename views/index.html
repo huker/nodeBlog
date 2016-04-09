@@ -1,28 +1,43 @@
 <%- include include/header.html %>
 
-<ul class="media-list">
+<div class="row">
+    <div class="col-md-8">
+        <ul class="media-list">
 
-    <%
-    for(var i=0;i<articles.length;i++){
-    var article=articles[i];
-    %>
-    <li class="media">
-        <div class="media-left">
-            <a href="#">
-                <img class="media-object" src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
-            </a>
-            <p>用户:<%=user.username%></p>
-        </div>
-        <div class="media-body">
-            <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
-            <p><%-article.content%></p>
-            <img src="<%=article.img%>" height="100px" alt=""/>
-        </div>
-    </li>
-    <%
-    }
-    %>
+            <%
+            for(var i=0;i<articles.length;i++){
+            var article=articles[i];
+            %>
+            <li class="media">
+                <div class="media-left">
+                    <a href="#">
+                        <img class="media-object" src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
+                    </a>
+                    <p>用户:<%=user.username%></p>
+                </div>
+                <div class="media-body">
+                    <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
+                    <p><%-article.content%></p>
+                    <img src="<%=article.img%>" height="100px" alt=""/>
+                </div>
+            </li>
+            <%
+            }
+            %>
 
-</ul>
+        </ul>
+    </div>
+    <div class="col-md-4">
+        <ul class="list-group">
+            <%for(var i=0;i<articles.length;i++){
+            var article=articles[i];
+            %>
+            <li class="list-group-item"><%=article.title%></li>
+            <%
+            }%>
+        </ul>
+    </div>
+</div>
+
 
 <%- include include/footer.html %>
