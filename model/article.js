@@ -10,7 +10,12 @@ var articleSchema = new mongoose.Schema({
     img:String,
     //类型是主键类型 引用的是user
     user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
-    creatAt:{type:Date,default:Date.now}
+    creatAt:{type:Date,default:Date.now},
+    comments:[{
+        user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
+        creatAt:{type:Date,default:Date.now},
+        content:String
+    }]
 });
 
 //定义model

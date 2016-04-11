@@ -95,4 +95,22 @@ router.post('/update/:_id',upload.single('img'),validate.checkLogin,function(req
         }
     })
 });
+
+//评论
+router.post('/comment',validate.checkLogin,function(req,res){
+    var user=req.session.user;
+    console.error(user);
+    var push={comments:{user:user._id,content:req.body.content}};
+    articleModel.update({_id:req.body._id},{$push:push}).populate('user').exec(function(err,result){
+        console.error(user.username);
+        if(err){
+            req.flash('error','评论发表失败');
+            res.redirect('back');
+        }else{
+            req.flash('success','评论成功');
+            res.redirect('back');
+        }
+    })
+});
+
 module.exports=router;
