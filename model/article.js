@@ -2,7 +2,7 @@
 * 文章写进数据库
 * */
 var mongoose = require('mongoose');
-//mongoose.connect('mongodb://127.0.0.1:27017/nodeBlog');
+// mongoose.connect('mongodb://127.0.0.1:27017/nodeBlog');
 //定义模型 确定数据库里表结构
 var articleSchema = new mongoose.Schema({
     title:String,

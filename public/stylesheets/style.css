@@ -1,8 +1,38 @@
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+
+/*header css*/
+.nav_right{
+   float: right;
+}
+/*index css*/
+.article_box_under{
+  border-bottom: 1px dashed #d9d9d9;
+  padding-bottom: 20px;
+}
+.name_padding{
+  padding: 5px 5px 5px 0;
 }
 
-a {
-  color: #00B7FF;
+/*center css*/
+.header_center{
+  padding: 40px 0;
+}
+.avatar_center{
+  background: #ffffff;
+  border-radius: 50%;
+  width: 100%;
+}
+.profile_item{
+  display: block;
+  color: #666666;
+  line-height: 18px;
+  margin-top: 10px;
+  vertical-align: middle;
+}
+.profile_item .fa{
+  color: #cccccc;
+  vertical-align: middle;
+  margin-right: 10px;
+  width: 20px;
+  font-size: 16px;
+  text-align: center;
 }

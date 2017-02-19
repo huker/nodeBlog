@@ -8,17 +8,19 @@
             for(var i=0;i<articles.length;i++){
             var article=articles[i];
             %>
-            <li class="media">
+            <li class="media article_box_under">
                 <div class="media-left">
                     <a href="#">
                         <img class="media-object" src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
                     </a>
-                    <p>用户:<%=article.user.username%></p>
+                    <p class="name_padding"><%=article.user.username%></p>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
                     <p><%-article.content%></p>
+                    <% if(article.img){%>
                     <img src="<%=article.img%>" height="100px" alt=""/>
+                    <%}%>
                 </div>
             </li>
             <%

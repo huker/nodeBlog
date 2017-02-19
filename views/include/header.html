@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>nodeBlog</title>
     <link rel="stylesheet" href="/lib/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/lib/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
 </head>
 <body>
 <nav class="navbar navbar-default">
@@ -17,11 +19,17 @@
             <a class="navbar-brand" href="/">nodeBlog</a>
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
+            <ul class="nav navbar-nav col-md-5">
+                <li><a href="/">博客</a></li>
+                <li><a href="/">话题</a></li>
+                <li><a href="/">问答</a></li>
+            </ul>
+            <ul class="nav navbar-nav nav_right">
                 <%
                 if(user){
                 %>
                     <li><a href="/articles/add">发表文章</a></li>
+                    <li><a href="/users/center">个人中心</a></li>
                     <li><a href="/users/logout">退出</a></li>
                     <%
                     }else{

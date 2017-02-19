@@ -12,7 +12,7 @@ router.get('/', function(req, res, next) {
       req.flash('error',err);
       return res.redirect('/');
     }else{
-      articles.forEach(function(article){
+        articles.forEach(function(article){
         article.content=markdown.toHTML(article.content);
       });
       res.render('index', {articles:articles});

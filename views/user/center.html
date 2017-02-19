@@ -1,0 +1,24 @@
+<%- include ../include/header.html %>
+
+<div class="header_center">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="avatar_center" src="<%=user.avatar%>" width="160" height="160" alt="<%=user.username%>">
+            </div>
+            <div class="col-md-5">
+                <h2 class="profile_name"><%=user.username%></h2>
+                <div class="profile_info">
+                    <span class="profile_item"><i class="fa icon-map-marker"></i><span>上海</span></span>
+                </div>
+            </div>
+            <div class="col-md-5">
+                <%=user.introduce%>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<%- include ../include/footer.html %>
+
