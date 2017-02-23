@@ -33,7 +33,8 @@ router.get('/login', validate.checkNotLogin, function (req, res) {
 router.post('/login', validate.checkNotLogin, function (req, res) {
     var user = req.body;
     userModel.findOne(user, function (err, user) {
-        if (!err && typeof err === 'object') {
+        console.log(arguments)
+        if (!user && typeof user === 'object') {
             req.flash('error', '登录失败');
             res.redirect('back');
         } else {
@@ -53,10 +54,47 @@ router.get('/center', validate.checkLogin, function (req, res) {
             req.flash('error',err);
             res.redirect('back');
         } else {
+            console.log(userInfo)
             res.render('user/center',{user:userInfo});
         }
     })
 
+})
+router.post('/center/sex', validate.checkLogin, function (req, res) {
+    console.log('get center sex')
+    var userData = req.session.user;
+    userModel.findByIdAndUpdate(userData._id,{$set:{sex:req.body.value}},{new: true}, function (err, user) {
+        if (err) {
+            req.flash('error', err);
+            res.redirect('back');
+        } else {
+            res.send(user);
+        }
+    })
+})
+router.post('/center/local', validate.checkLogin, function (req, res) {
+    console.log('get center local');
+    var userData = req.session.user;
+    userModel.findByIdAndUpdate(userData._id,{$set:{local:req.body.value}},{new: true}, function (err, user) {
+        if (err) {
+            req.flash('error', err);
+            res.redirect('back');
+        } else {
+            res.send(user);
+        }
+    })
+})
+router.post('/center/year', validate.checkLogin, function (req, res) {
+    console.log('get center year')
+    var userData = req.session.user;
+    userModel.findByIdAndUpdate(userData._id,{$set:{year:req.body.value}},{new: true}, function (err, user) {
+        if (err) {
+            req.flash('error', err);
+            res.redirect('back');
+        } else {
+            res.send(user);
+        }
+    })
 })
 
 //退出

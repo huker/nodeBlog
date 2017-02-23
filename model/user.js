@@ -9,7 +9,8 @@ var userSchema = new mongoose.Schema({
     avatar:String,
     introduce:String,
     local:String,
-    edu:String
+    year:String,
+    sex:String
 });
 //定义model
 var userModel = mongoose.model('user',userSchema);

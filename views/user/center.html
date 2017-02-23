@@ -9,7 +9,9 @@
             <div class="col-md-5">
                 <h2 class="profile_name"><%=user.username%></h2>
                 <div class="profile_info">
-                    <span class="profile_item"><i class="fa icon-map-marker"></i><span>上海</span></span>
+                    <span class="profile_item"><i class="fa icon-map-marker"></i><span><%=user.local%></span><i data-type="local" class="fa icon-pencil send_i"></i></span>
+                    <span class="profile_item"><i class="fa icon-user"></i><span><%=user.sex%></span><i data-type="sex" class="fa icon-pencil send_i"></i></span>
+                    <span class="profile_item"><i class="fa icon-time"></i><span><%=user.year%></span><i data-type="year" class="fa icon-pencil send_i"></i><span>岁</span></span>
                 </div>
             </div>
             <div class="col-md-5">
@@ -17,6 +19,9 @@
             </div>
         </div>
     </div>
+</div>
+<div>
+
 </div>
 
 
