@@ -36,3 +36,56 @@
   font-size: 16px;
   text-align: center;
 }
+
+/*question.css*/
+.section-list-item{
+  padding: 15px 0;
+  border-bottom: 1px solid #eeeeee;
+}
+.qa-rank{
+  float: left;
+  text-align: center;
+}
+.qa-answer,.qa-view{
+  display: inline-block;
+  width: 45px;
+  height: 40px;
+}
+.qa-answer{
+  color: #ffffff;
+  background: #ad3a37;
+}
+.qa-view{
+  color: #cccccc;
+}
+.qa-rank small{
+  display: block;
+}
+.qa-summary{
+  float: left;
+  margin-left: 20px;
+}
+.qa-summary p{
+  margin: 0;
+  padding: 0;
+}
+.qa-summary .title{
+  font-size: 16px;
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+.qa-summary ul{
+  display: inline-block;
+  padding: 0;
+  margin: 0;
+}
+.qa-summary ul li{
+  list-style: none;
+  display: inline-block;
+  background: #e2e2e2;
+  font-size: 10px;
+  padding: 1px 3px;
+  text-align: center;
+  margin-left: 5px;
+}

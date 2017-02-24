@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var userModel = require('../model/user');
+var articleModel=require('../model/article.js');
 var validate = require('../middle/index.js');
 var crypto = require('crypto'); //md5
 
@@ -46,7 +47,7 @@ router.post('/login', validate.checkNotLogin, function (req, res) {
 
 });
 
-//个人中心
+//个人中心 start-----------------
 router.get('/center', validate.checkLogin, function (req, res) {
     var userDate = req.session.user;
     userModel.findById(userDate._id, function (err, userInfo) {
@@ -54,12 +55,31 @@ router.get('/center', validate.checkLogin, function (req, res) {
             req.flash('error',err);
             res.redirect('back');
         } else {
-            console.log(userInfo)
-            res.render('user/center',{user:userInfo});
+            console.log(userInfo);
+            findUserArticle(req,res,function (data) {
+                var articleData = data;
+                console.log(articleData);
+                res.render('user/center',{user:userInfo,articles:articleData});
+            });
+
         }
     })
 
-})
+});
+//查询用户的文章
+function findUserArticle(req,res,cb){
+    var userData = req.session.user;
+    articleModel.find({user:userData._id},function (err,data) {
+        if (err) {
+            req.flash('error',err);
+            res.redirect('back');
+        }else{
+            cb(data);
+        }
+    })
+}
+
+//用户的个人资料修改
 router.post('/center/sex', validate.checkLogin, function (req, res) {
     console.log('get center sex')
     var userData = req.session.user;
@@ -95,7 +115,9 @@ router.post('/center/year', validate.checkLogin, function (req, res) {
             res.send(user);
         }
     })
-})
+});
+
+//个人中心 end -----------------------------------
 
 //退出
 router.get('/logout', validate.checkLogin, function (req, res) {

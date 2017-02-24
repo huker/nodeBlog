@@ -1,7 +1,6 @@
 <%- include ../include/header.html %>
 
 <div class="header_center">
-    <div class="container">
         <div class="row">
             <div class="col-md-2">
                 <img class="avatar_center" src="<%=user.avatar%>" width="160" height="160" alt="<%=user.username%>">
@@ -18,11 +17,36 @@
                 <%=user.introduce%>
             </div>
         </div>
-    </div>
 </div>
-<div>
 
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active"><a href="">我的文章</a></li>
+            <li role="presentation"><a href="">我的提问</a></li>
+            <li role="presentation"><a href="">我的回答</a></li>
+            <li role="presentation"><a href="">我的话题</a></li>
+            <li role="presentation"><a href="">我的评论</a></li>
+        </ul>
+    </div>
+    <div class="col-md-offset-1 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                文章列表
+            </div>
+            <ul class="list-group">
+                <%for(var i=0;i<articles.length;i++){
+                var article = articles[i];
+                %>
+                <li class="list-group-item"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></li>
+                <%
+                }%>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-offset-1 col-md-2"></div>
 </div>
+
 
 
 <%- include ../include/footer.html %>

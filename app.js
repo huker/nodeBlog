@@ -9,6 +9,7 @@ var bodyParser = require('body-parser');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var articles = require('./routes/articles');
+var questions = require('./routes/questions');
 var session=require('express-session');
 var MongoStore=require('connect-mongo')(session);
 var flash = require('connect-flash');
@@ -58,6 +59,7 @@ app.use(function(req,res,next){
 app.use('/', routes);
 app.use('/users', users);
 app.use('/articles', articles);
+app.use('/questions', questions);
 
 //线性执行 上面全没找到的话　就捕获404
 // catch 404 and forward to error handler
