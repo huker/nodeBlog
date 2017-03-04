@@ -1,0 +1,53 @@
+<%- include ../include/header.html %>
+
+<div class="header_center">
+        <div class="row">
+            <div class="col-md-2">
+                <img class="avatar_center" src="<%=user.avatar%>" width="160" height="160" alt="<%=user.username%>">
+            </div>
+            <div class="col-md-5">
+                <h2 class="profile_name"><%=user.username%></h2>
+                <div class="profile_info">
+                    <span class="profile_item"><i class="fa icon-map-marker"></i><span><%=user.local%></span></span>
+                    <span class="profile_item"><i class="fa icon-user"></i><span><%=user.sex%></span>
+                    <span class="profile_item"><i class="fa icon-time"></i><span><%=user.year%></span><span>岁</span></span>
+                </div>
+            </div>
+            <div class="col-md-5 border_GREY">
+                <%=user.introduce%>
+            </div>
+        </div>
+</div>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked">
+            <li role="presentation" class="active"><a href="">他的文章</a></li>
+            <li role="presentation"><a href="">他的提问</a></li>
+            <li role="presentation"><a href="">他的回答</a></li>
+            <li role="presentation"><a href="">他的话题</a></li>
+            <li role="presentation"><a href="">他的评论</a></li>
+        </ul>
+    </div>
+    <div class="col-md-offset-1 col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                文章列表
+            </div>
+            <ul class="list-group">
+                <%for(var i=0;i<articles.length;i++){
+                var article = articles[i];
+                %>
+                <li class="list-group-item"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></li>
+                <%
+                }%>
+            </ul>
+        </div>
+    </div>
+    <div class="col-md-offset-1 col-md-2"></div>
+</div>
+
+
+
+<%- include ../include/footer.html %>
+

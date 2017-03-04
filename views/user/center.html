@@ -2,7 +2,7 @@
 
 <div class="header_center">
         <div class="row">
-            <div class="col-md-2">
+            <div class="col-md-2" style="text-align: center">
                 <img class="avatar_center" src="<%=user.avatar%>" width="160" height="160" alt="<%=user.username%>">
             </div>
             <div class="col-md-5">
@@ -14,7 +14,16 @@
                 </div>
             </div>
             <div class="col-md-5">
-                <%=user.introduce%>
+                <div class="intro-plant">
+                    <div class="intro-title">
+                        <i data-type="sex" class="fa icon-pencil send_i"></i><span> 编辑</span>
+                    </div>
+                    <div class="intro-con">
+                        <%=user.introduce%>
+                        签名档(还没写api)
+                    </div>
+                </div>
+
             </div>
         </div>
 </div>

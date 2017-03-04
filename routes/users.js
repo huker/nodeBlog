@@ -56,20 +56,40 @@ router.get('/center', validate.checkLogin, function (req, res) {
             res.redirect('back');
         } else {
             console.log(userInfo);
-            findUserArticle(req,res,function (data) {
+            findUserArticle(userDate._id,res,function (data) {
                 var articleData = data;
-                console.log(articleData);
                 res.render('user/center',{user:userInfo,articles:articleData});
             });
 
         }
     })
-
 });
-//查询用户的文章
-function findUserArticle(req,res,cb){
-    var userData = req.session.user;
-    articleModel.find({user:userData._id},function (err,data) {
+router.get('/userCenter/:_id',validate.checkLogin,function (req, res) {
+    var userNow = req.session.user;
+    if (req.params._id === userNow._id) {
+        res.redirect('/users/center');
+    } else{
+        userModel.findById(req.params._id, function (err, userInfo) {
+            if (err) {
+                req.flash('error',err);
+                res.redirect('back');
+            } else {
+                console.log(userInfo);
+                findUserArticle(req.params._id,res,function (data) {
+                    var articleData = data;
+                    res.render('user/centerOther',{user:userInfo,articles:articleData});
+                });
+
+            }
+        })
+    }
+});
+/**
+ *用户中心文章列表
+ * @param userId 选择的用户的id
+ */
+function findUserArticle(userId,res,cb){
+    articleModel.find({user:userId},function (err,data) {
         if (err) {
             req.flash('error',err);
             res.redirect('back');

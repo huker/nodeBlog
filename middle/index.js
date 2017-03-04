@@ -20,3 +20,10 @@ exports.checkNotLogin=function(req,res,next){
         next();
     }
 };
+
+exports.getTimeForm = function(data) {
+    var creatTime = data.creatAt.toLocaleString();
+    var timeArr = creatTime.split(',')[0].split('/');
+    var timeGet = timeArr[2]+'年'+timeArr[0]+'月'+timeArr[1]+'日';
+    return timeGet;
+}

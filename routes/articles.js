@@ -6,6 +6,7 @@ var articleModel=require('../model/article.js');
 var router=express.Router();
 var multer=require('multer');
 var validate=require('../middle/index.js');
+var markdown = require('markdown').markdown;
 
 //指定文件元素的存储方式
 var storage = multer.diskStorage({
@@ -46,12 +47,17 @@ router.post('/add',validate.checkLogin,upload.single('img'),function(req,res){
 
 //详情文章页面
 router.get('/detail/:_id',validate.checkLogin,function(req,res){
-    articleModel.findById(req.params._id,function(err,article) {
+    articleModel.findById(req.params._id).populate('user').populate('comments.user').exec(function(err,article) {
         if (err) {
             req.flash('error', err);
             res.redirect('back')
         }
         else {
+            article.content = markdown.toHTML(article.content);
+            article.timeGet = validate.getTimeForm(article);
+            for(var i=0;i<article.comments.length;i++){
+                article.comments[i]['timeGet'] = validate.getTimeForm(article.comments[i]);
+            }
             res.render('article/detail', {article: article});
         }
     })
@@ -72,8 +78,14 @@ router.get('/delete/:_id',validate.checkLogin,function(req,res){
 
 //修改文章
 router.get('/update/:_id',validate.checkLogin,function(req,res){
+    console.log(req.params._id)
     articleModel.findById(req.params._id,function(err,article){
-        res.render('article/update',{article:article})
+        if(req.session.user._id != article.user){
+            req.flash('error','不是您的文章哟');
+            res.redirect('back');
+        }else{
+            res.render('article/update',{article:article})
+        }
     })
 });
 
@@ -91,7 +103,7 @@ router.post('/update/:_id',upload.single('img'),validate.checkLogin,function(req
             res.redirect('back')
         }else{
             req.flash('success','更新文章成功');
-            res.redirect('/');
+            res.redirect('/articles/detail/'+req.params._id);
         }
     })
 });

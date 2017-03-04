@@ -1,0 +1,69 @@
+<%- include ../include/header.html %>
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="qa-panel clearfix">
+            <span class="qa-ask-span">问</span>
+            <div class="qa-ask-title">
+                <h3><%=qa.title%></h3>
+                <p><a href="/"><%=qa.user.username%></a><span style="padding: 0 10px">提问于</span>
+                    <span class="color_GREY"><%=qa.timeGet%></span>
+                </p>
+            </div>
+            <div class="qa-ask-btn">
+                <button type="button" class="btn btn-xs btn-primary">收藏</button>
+                <button type="button" class="btn btn-xs btn-danger">编辑</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-9">
+        <div class="qa-contain">
+            <%-qa.content%>
+        </div>
+        <div class="qa-answer-part">
+            <div class="qa-answer-title">
+                <h4><%=qa.answers.length%>个回答</h4>
+            </div>
+            <div class="qa-answer-con">
+                <%for(var i =0;i<qa.answers.length;i++){
+                    var answer = qa.answers[i];
+                %>
+                <article class="clearfix">
+                    <div class="post-col">
+                        <button class="vote-btn">
+                            <span><%=answer.up%></span>
+                            <i class="fa icon-thumbs-up"></i>
+                        </button>
+                    </div>
+                    <div class="qa-answer-word">
+                        <div>
+                            <%-answer.content%>
+                        </div>
+
+                        <p class="answer-info">
+                            <a href="/"><%=answer.user.username%></a><span style="padding: 0 10px">回答于</span>
+                            <span class="color_GREY"><%=answer.timeGet%></span>
+                        </p>
+                    </div>
+                </article>
+                <%}%>
+
+            </div>
+            <div class="answer-form">
+                <h4>撰写答案</h4>
+                <form action="/questions/answer" method="post" class="clearfix">
+                    <input type="hidden" name="_id" value="<%=qa._id%>">
+                    <div class="form-group">
+                        <textarea class="form-control" name="content" id="content" placeholder="请在此撰写答案..." cols="30" rows="10"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-success">提交回答</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+
+<%- include ../include/footer.html %>

@@ -1,11 +1,11 @@
 <%- include include/header.html %>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
         <ul class="media-list">
 
             <%
-            for(var i=0;i<articles.length;i++){
+            for(var i=articles.length-1;i>=0;i--){
             var article=articles[i];
             %>
             <li class="media article_box_under">
@@ -13,7 +13,7 @@
                     <a href="#">
                         <img class="media-object" src="<%=article.user.avatar%>" alt="<%=article.user.username%>">
                     </a>
-                    <p class="name_padding"><%=article.user.username%></p>
+                    <p class="name_padding"><a href="/users/userCenter/<%=article.user._id%>"><%=article.user.username%></a></p>
                 </div>
                 <div class="media-body">
                     <h4 class="media-heading"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></h4>
@@ -29,15 +29,19 @@
 
         </ul>
     </div>
-    <div class="col-md-4">
-        <ul class="list-group">
-            <li class="list-group-item">文章列表 <span class="badge"><%=articles.length%></span></li>
-            <%for(var i=0;i<articles.length;i++){
-            var article=articles[i];
-            %>
-            <li class="list-group-item"><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></li>
-            <%
-            }%>
+    <div class="col-md-3">
+        <div class="qa-ask-plant qa-answer-border bgcolor_yellow">
+            <p>今天，想写篇文章么？</p>
+            <p>分享出来吧(ง •̀_•́)ง</p>
+            <a class="btn btn-primary btn-block" href="/articles/add">撰写</a>
+        </div>
+        <ul class="list-group" style="margin-top: 20px">
+            <li class="list-group-item">博文分类<span class="badge"><%=articles.length%></span></li>
+            <li class="list-group-item"><a href="/"> Java Web开发</a></li>
+            <li class="list-group-item"><a href="/"> PHP开发</a></li>
+            <li class="list-group-item"><a href="/"> 前端开发</a></li>
+            <li class="list-group-item"><a href="/"> IOS开发</a></li>
+            <li class="list-group-item"><a href="/"> Android开发</a></li>
         </ul>
     </div>
 </div>

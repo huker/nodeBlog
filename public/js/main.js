@@ -4,6 +4,11 @@
 $(function () {
     $('.send_i').click(function () {
         changeTextInput($(this))
+    });
+    $('#update_btn').click(function () {
+        window.location.href='/articles/update/'+$(this).attr('data-type');
+    });
+    $('#collection_btn').click(function () {
     })
 });
 /**
@@ -19,7 +24,7 @@ function changeTextInput(ele) {
         '<input type="text" id="changed_val" value="'+old_value+'">' +
         '<button class="btn btn-sm btn-default change_btn">修改</button></form>');
     $('.change_btn').click(function () {
-        sendNewValue(type)
+        sendNewValue(type);
         return false
     });
     function sendNewValue(tip) {

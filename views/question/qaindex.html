@@ -1,52 +1,38 @@
 <%- include ../include/header.html %>
 
 <div class="row">
-    <div class="col-md-8">
+    <div class="col-md-9">
+        <%
+        for(var i = questions.length-1;i>=0;i--){
+        var question = questions[i];
+        %>
         <section class="section-list-item clearfix">
             <div class="qa-rank">
-                <div class="qa-answer"><span>3</span><small>回答</small></div>
+                <div class="qa-answer"><span><%=question.answers.length%></span><small>回答</small></div>
                 <div class="qa-view"><span>10</span><small>浏览</small></div>
             </div>
             <div class="qa-summary">
-                <p><a href="/">huker</a><span>提问</span></p>
-                <h2 class="title">ionic使用对象绑定数据模型</h2>
+                <p><a href="/"><%=question.user.username%></a>
+                    <span style="padding: 0 10px">提问于</span>
+                    <span class="color_GREY"><%=question.timePrint%></span>
+                </p>
+                <h2 class="title"><a href="/questions/detail/<%=question._id%>"><%=question.title%></a></h2>
                 <ul>
                     <li>ionic</li>
                     <li>html5</li>
                 </ul>
             </div>
         </section>
-        <section class="section-list-item clearfix">
-            <div class="qa-rank">
-                <div class="qa-answer"><span>3</span><small>回答</small></div>
-                <div class="qa-view"><span>10</span><small>浏览</small></div>
-            </div>
-            <div class="qa-summary">
-                <p><a href="/">huker</a><span>提问</span></p>
-                <h2 class="title">ionic使用对象绑定数据模型</h2>
-                <ul>
-                    <li>ionic</li>
-                    <li>html5</li>
-                </ul>
-            </div>
-        </section>
-        <section class="section-list-item clearfix">
-            <div class="qa-rank">
-                <div class="qa-answer"><span>3</span><small>回答</small></div>
-                <div class="qa-view"><span>10</span><small>浏览</small></div>
-            </div>
-            <div class="qa-summary">
-                <p><a href="/">huker</a><span>提问</span></p>
-                <h2 class="title">ionic使用对象绑定数据模型</h2>
-                <ul>
-                    <li>ionic</li>
-                    <li>html5</li>
-                </ul>
-            </div>
-        </section>
-    </div>
-    <div class="col-md-4">
+        <%}%>
 
+
+    </div>
+    <div class="col-md-3">
+        <div class="qa-ask-plant qa-answer-border bgcolor_yellow">
+            <p>今天，你遇到了什么问题呢？</p>
+            <p>分享出来吧(ง •̀_•́)ง</p>
+            <a class="btn btn-primary btn-block" href="/questions/add">提问</a>
+        </div>
     </div>
 </div>
 

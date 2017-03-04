@@ -8,10 +8,11 @@ var questionSchema = new mongoose.Schema({
     img:String,
     user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
     creatAt:{type:Date,default:Date.now},
-    comments:[{
+    answers:[{
         user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
         creatAt:{type:Date,default:Date.now},
-        content:String
+        content:String,
+        up:{type:Number,default:0}
     }]
 });
 
