@@ -1,8 +1,14 @@
-# nodeBlog博客小项目
-技术栈：bootstrap+express+mongodb
+# nodeBlog博客
+
+> bootstrap+express+mongodb
+
+已经完成：
 * 用户注册登录
-* 文章发表、修改、删除
-* 文章支持markdown
+* 文章发表、修改、删除,支持markdown,评论
+* 问答发表、修改、删除、评论
 * 支持图片、文件上传
-* 评论功能（有bug啊还没解决QAQ）
-* 未完待续0-0
+* 个人中心（包括查看其他用户）
+
+还未：
+* 消息通知
+* 话题模块
