@@ -10,11 +10,71 @@ $(function () {
     });
     $('#collection_btn').click(function () {
     })
+    $('#center_nav_tips').on('click','li',function () {
+        $(this).addClass('active');
+        $(this).siblings().removeClass('active');
+        var tip = $(this).attr('data-type');
+        var uid = $('#userId').attr('data-type');
+        switch (tip){
+            case 'article':
+                $('#tip_title').html('我的文章');
+                break;
+            case 'ask':
+                $('#tip_title').html('我的提问');
+                break;
+            case 'answer':
+                $('#tip_title').html('我的回答');
+                break;
+            case 'topic':
+                $('#tip_title').html('我的话题');
+                break;
+            case 'comment':
+                $('#tip_title').html('我的评论');
+                break;
+        }
+        center_tip_data(tip,uid);
+    })
 });
 /**
  * 点击修改图标文字变输入框
  * @param ele 当前ele
  */
+function center_tip_data(tip,id) {
+    $.ajax({
+        url:'/users/userCenter/'+tip+'/'+id,
+        method:'GET',
+        dataType:'json',
+        contentType:'application/json',
+        success:function (data) {
+            console.log(data);
+            $('#tip_list').empty();
+            if(data.length>0){
+                var html = '';
+                $.each(data,function (i, ele) {
+                    switch (tip){
+                        case 'article':
+                            html+='<li class="list-group-item"><a href="/articles/detail/'+ele._id+'">'+ele.title+'</a></li>';
+                            break;
+                        case 'ask':
+                            html+='<li class="list-group-item"><a href="/questions/detail/'+ele._id+'">'+ele.title+'</a></li>';
+                            break;
+                        case 'answer':
+                            break;
+                        case 'topic':
+                            break;
+                        case 'comment':
+                            break;
+                    }
+                });
+                $('#tip_list').append(html);
+            }
+            
+        },
+        error:function () {
+            $('#tip_list').html('无');
+        }
+    })
+}
 function changeTextInput(ele) {
     var old_value = $(ele).prev().html();
     var type = $(ele).attr('data-type');

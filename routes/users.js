@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 var userModel = require('../model/user');
 var articleModel=require('../model/article.js');
+var qaModel=require('../model/question.js');
 var validate = require('../middle/index.js');
 var crypto = require('crypto'); //md5
 
@@ -47,7 +48,7 @@ router.post('/login', validate.checkNotLogin, function (req, res) {
 
 });
 
-//个人中心 start-----------------
+//----------------个人中心 start-----------------
 router.get('/center', validate.checkLogin, function (req, res) {
     var userDate = req.session.user;
     userModel.findById(userDate._id, function (err, userInfo) {
@@ -64,6 +65,7 @@ router.get('/center', validate.checkLogin, function (req, res) {
         }
     })
 });
+//别的用户的center(用户id查询 判断下是否是自己)
 router.get('/userCenter/:_id',validate.checkLogin,function (req, res) {
     var userNow = req.session.user;
     if (req.params._id === userNow._id) {
@@ -74,7 +76,6 @@ router.get('/userCenter/:_id',validate.checkLogin,function (req, res) {
                 req.flash('error',err);
                 res.redirect('back');
             } else {
-                console.log(userInfo);
                 findUserArticle(req.params._id,res,function (data) {
                     var articleData = data;
                     res.render('user/centerOther',{user:userInfo,articles:articleData});
@@ -83,6 +84,36 @@ router.get('/userCenter/:_id',validate.checkLogin,function (req, res) {
             }
         })
     }
+});
+//查询tip列表(不分是否是自己 用userid查找)
+//文章列表
+router.get('/userCenter/article/:_id',validate.checkLogin,function (req, res) {
+    findUserArticle(req.params._id,res,function (data) {
+        res.send(data);
+    });
+});
+//提问列表
+router.get('/userCenter/ask/:_id',validate.checkLogin,function (req, res) {
+    qaModel.find({user:req.params._id},function (err, data) {
+        if(err){
+            req.flash('error',err);
+            res.redirect('back');
+        }else{
+            res.send(data)
+        }
+    })
+});
+//回答列表
+router.get('/userCenter/answer/:_id',validate.checkLogin,function (req, res) {
+    res.send()
+});
+//回答列表
+router.get('/userCenter/topic/:_id',validate.checkLogin,function (req, res) {
+    res.send()
+});
+//回答列表
+router.get('/userCenter/comment/:_id',validate.checkLogin,function (req, res) {
+    res.send()
 });
 /**
  *用户中心文章列表
@@ -137,7 +168,7 @@ router.post('/center/year', validate.checkLogin, function (req, res) {
     })
 });
 
-//个人中心 end -----------------------------------
+//------------------------个人中心 end -----------------------------------
 
 //退出
 router.get('/logout', validate.checkLogin, function (req, res) {

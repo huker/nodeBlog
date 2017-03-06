@@ -27,23 +27,24 @@
             </div>
         </div>
 </div>
-
+<input type="hidden" data-type="<%=user._id%>" id="userId">
 <div class="row">
     <div class="col-md-2">
-        <ul class="nav nav-pills nav-stacked">
-            <li role="presentation" class="active"><a href="">我的文章</a></li>
-            <li role="presentation"><a href="">我的提问</a></li>
-            <li role="presentation"><a href="">我的回答</a></li>
-            <li role="presentation"><a href="">我的话题</a></li>
-            <li role="presentation"><a href="">我的评论</a></li>
+        <ul class="nav nav-pills nav-stacked" id="center_nav_tips">
+            <li data-type="article" role="presentation" class="active"><a href="javascript:;">我的文章</a></li>
+            <li data-type="ask" role="presentation"><a href="javascript:;">我的提问</a></li>
+            <li data-type="answer" role="presentation"><a href="javascript:;">我的回答</a></li>
+            <li data-type="topic" role="presentation"><a href="javascript:;">我的话题</a></li>
+            <li data-type="comment"  role="presentation"><a href="javascript:;">我的评论</a></li>
         </ul>
     </div>
     <div class="col-md-offset-1 col-md-6">
         <div class="panel panel-default">
-            <div class="panel-heading">
+            <div class="panel-heading" id="tip_title">
                 文章列表
             </div>
-            <ul class="list-group">
+            <ul class="list-group" id="tip_list">
+
                 <%for(var i=0;i<articles.length;i++){
                 var article = articles[i];
                 %>

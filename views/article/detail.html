@@ -5,7 +5,7 @@
             <span class="qa-ask-span">文</span>
             <div class="qa-ask-title">
                 <h3><%=article.title%></h3>
-                <p><a href="/"><%=article.user.username%></a><span style="padding: 0 10px">发布于</span>
+                <p><a href="/users/userCenter/<%=article.user._id%>"><%=article.user.username%></a><span style="padding: 0 10px">发布于</span>
                     <span class="color_GREY"><%=article.timeGet%></span>
                 </p>
             </div>
@@ -59,7 +59,7 @@
     <div class="col-md-3">
         <div class="qa-ask-plant border_GREY">
             <p><img style="border-radius: 50%" src="<%=article.user.avatar%>" alt="<%=article.user.username%>"></p>
-            <p>作者:<a href="/"><%=article.user.username%></a></p>
+            <p>作者:<a href="/users/userCenter/<%=article.user._id%>"><%=article.user.username%></a></p>
             <p>“ 这家伙很懒，什么个性签名都没有留下。 ”</p>
         </div>
     </div>
