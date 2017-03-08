@@ -39,7 +39,7 @@ router.post('/add',validate.checkLogin,upload.single('img'),function(req,res){
             res.redirect('back');
         }else{
             req.flash('success','文章发表成功');
-            return res.redirect('/');
+            return res.redirect('/blogs');
         }
     });
 
@@ -71,7 +71,7 @@ router.get('/delete/:_id',validate.checkLogin,function(req,res){
             res.redirect('back')
         }else{
             req.flash('success','文章删除成功');
-            res.redirect('/');
+            res.redirect('/blogs');
         }
     })
 });

@@ -132,7 +132,6 @@ function findUserArticle(userId,res,cb){
 
 //用户的个人资料修改
 router.post('/center/sex', validate.checkLogin, function (req, res) {
-    console.log('get center sex')
     var userData = req.session.user;
     userModel.findByIdAndUpdate(userData._id,{$set:{sex:req.body.value}},{new: true}, function (err, user) {
         if (err) {
@@ -144,7 +143,6 @@ router.post('/center/sex', validate.checkLogin, function (req, res) {
     })
 })
 router.post('/center/local', validate.checkLogin, function (req, res) {
-    console.log('get center local');
     var userData = req.session.user;
     userModel.findByIdAndUpdate(userData._id,{$set:{local:req.body.value}},{new: true}, function (err, user) {
         if (err) {
@@ -156,7 +154,6 @@ router.post('/center/local', validate.checkLogin, function (req, res) {
     })
 })
 router.post('/center/year', validate.checkLogin, function (req, res) {
-    console.log('get center year')
     var userData = req.session.user;
     userModel.findByIdAndUpdate(userData._id,{$set:{year:req.body.value}},{new: true}, function (err, user) {
         if (err) {

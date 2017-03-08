@@ -5,6 +5,7 @@ var express = require('express');
 var router = express.Router();
 var validate=require('../middle/index.js');
 var qaModel = require('../model/question.js');
+var asModel = require('../model/answer.js');
 var async = require('async');
 
 router.get('/',function (req, res) {
@@ -73,7 +74,8 @@ router.post('/answer',validate.checkLogin,function (req,res) {
         }else{
             res.redirect('back');
         }
-    })
+    });
+    asModel.creat()
 });
 
 

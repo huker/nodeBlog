@@ -23,26 +23,28 @@
         </div>
         <div class="qa-answer-part">
             <div class="qa-answer-title">
-                <h4>评论</h4>
+                <h4>评论区</h4>
             </div>
             <div class="qa-answer-con">
-                <%for(var i =0;i<article.comments.length;i++){
-                var comment = article.comments[i];
-                %>
-                <article class="clearfix">
-                    <div class="qa-answer-word" style="margin-left: 0;">
-                        <div>
-                            <%-comment.content%>
+                <%if(article.comments.length>0){
+                    for(var i =0;i<article.comments.length;i++){
+                    var comment = article.comments[i];
+                    %>
+                    <article class="clearfix">
+                        <div class="qa-answer-word" style="margin-left: 0;">
+                            <div>
+                                <%-comment.content%>
+                            </div>
+
+                            <p class="answer-info">
+                                <a href="/"><%=comment.user.username%></a><span style="padding: 0 10px">评论于</span>
+                                <span class="color_GREY"><%=comment.timeGet%></span>
+                            </p>
                         </div>
-
-                        <p class="answer-info">
-                            <a href="/"><%=comment.user.username%></a><span style="padding: 0 10px">评论于</span>
-                            <span class="color_GREY"><%=comment.timeGet%></span>
-                        </p>
-                    </div>
-                </article>
+                    </article>
+                <%}}else{%>
+                <p style="margin-bottom: 20px">暂无</p>
                 <%}%>
-
             </div>
             <div class="answer-form" style="padding: 0;">
                 <h4>评论</h4>
