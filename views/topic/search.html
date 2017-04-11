@@ -1,0 +1,31 @@
+<%- include ../include/header.html %>
+<h2>搜索结果</h2>
+
+<h4>相关文章</h4>
+
+<%if(data.article.length != 0){
+for(var i=0;i<data.article.length;i++){
+var article = data.article[i];
+%>
+<p><a href="/articles/detail/<%=article._id%>"><%=article.title%></a></p>
+<%}
+}else{
+%>
+<p>无</p>
+<%}%>
+<hr>
+<h4>相关问题</h4>
+<%if(data.qs.length != 0){
+    for(var j=0;j<data.qs.length;j++){
+        var qs = data.qs[j];
+        %>
+        <a href="/questions/detail/<%=qs._id%>"><%=qs.title%></a>
+    <%}
+}else{
+    %>
+    <p>无</p>
+<%}%>
+
+
+<%- include ../include/footer.html %>
+

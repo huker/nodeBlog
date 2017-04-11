@@ -10,7 +10,12 @@ var userSchema = new mongoose.Schema({
     introduce:String,
     local:String,
     year:String,
-    sex:String
+    sex:String,
+    messages:[{
+        read:{type:Boolean,default:false},
+        creatAt:{type:Date,default:Date.now},
+        content:String
+    }]
 });
 //定义model
 var userModel = mongoose.model('user',userSchema);

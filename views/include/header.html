@@ -27,11 +27,21 @@
                 <li><a href="/blogs">博客</a></li>
                 <li><a href="/questions">问答</a></li>
             </ul>
+            <ul class="nav navbar-nav">
+                <form class="form-inline" style="padding: 8px">
+                    <div class="form-group">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="关键词" id="s_content">
+                        </div>
+                    </div>
+                    <button type="button" id="searchBtn" class="btn btn-primary">查询</button>
+                </form>
+            </ul>
             <ul class="nav navbar-nav nav_right">
                 <%
                 if(user){
                 %>
-                    <li><a href="/">消息</a></li>
+                    <li><a href="/messages">消息</a></li>
                     <li><a href="/users/center">个人中心</a></li>
                     <li><a href="/users/logout">退出</a></li>
                     <%

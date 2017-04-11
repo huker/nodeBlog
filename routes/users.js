@@ -107,11 +107,7 @@ router.get('/userCenter/ask/:_id',validate.checkLogin,function (req, res) {
 router.get('/userCenter/answer/:_id',validate.checkLogin,function (req, res) {
     res.send()
 });
-//回答列表
-router.get('/userCenter/topic/:_id',validate.checkLogin,function (req, res) {
-    res.send()
-});
-//回答列表
+//comment列表
 router.get('/userCenter/comment/:_id',validate.checkLogin,function (req, res) {
     res.send()
 });
