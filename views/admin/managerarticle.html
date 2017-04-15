@@ -1,0 +1,38 @@
+<%- include ../include/backheader.html %>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" id="admin_nav_tips">
+            <li data-type="sysUser" role="presentation"><a href="/admin/manage-info">用户管理</a></li>
+            <li data-type="sysArticle" role="presentation" class="active"><a href="/admin/sys-article">文章管理</a></li>
+            <li data-type="sysQs" role="presentation"><a href="/admin/sys-qs">问题管理</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+            <table class="table table-bordered">
+                <tr>
+                    <td>序号</td>
+                    <td>文章标题</td>
+                    <td>发表人</td>
+                    <td>发表日期</td>
+                    <td>操作</td>
+                </tr>
+                <%for(var i=0;i<sys_article.length;i++){
+                var article = sys_article[i];
+                %>
+                <tr data-type="<%=article._id%>">
+                    <td><%=sys_article.length-i%></td>
+                    <td><%=article.title%></td>
+                    <td><%=article.user.username%></td>
+                    <td><%=(article.creatAt).toLocaleString()%></td>
+                    <td><button class="btn btn-danger">删除</button></td>
+                </tr>
+                <%
+                }%>
+            </table>
+    </div>
+</div>
+
+
+<%- include ../include/backfooter.html %>
+

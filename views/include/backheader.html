@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>nodeBlog</title>
+    <link rel="stylesheet" href="/lib/css/bootstrap.css"/>
+    <link rel="stylesheet" href="/lib/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="/stylesheets/style.css"/>
+    <script src="/lib/js/jquery.min.js"></script>
+    <!--<script src="/lib/js/jquery-1.8.2.min.js"></script>-->
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">nodeBlog后台管理</a>
+        </div>
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav nav_right">
+                    <li><a href="javascript:;">管理员:<%=user.username%></a></li>
+                    <li><a href="/admin/logout">退出</a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div class="container">
+    <%
+    if(success){
+    %>
+    <div class="alert alert-success" role="alert"><%=success%></div>
+    <%
+    }
+    else if(error){
+    %>
+    <div class="alert alert-danger" role="alert"><%=error%></div>
+    <%
+    }
+    %>

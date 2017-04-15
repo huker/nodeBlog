@@ -14,6 +14,7 @@ router.get('/reg', validate.checkNotLogin, function (req, res) {
 router.post('/reg', validate.checkNotLogin, function (req, res) {
     var user = req.body;
     user.avatar = 'https://secure.gravatar.com/avatar/' + md5(user.email);
+    user.roles = 1;
     userModel.create(user, function (err, doc) {
         if (err) {
             req.flash('error', err);
@@ -36,13 +37,18 @@ router.post('/login', validate.checkNotLogin, function (req, res) {
     var user = req.body;
     userModel.findOne(user, function (err, user) {
         console.log(arguments)
-        if (!user && typeof user === 'object') {
+        if (!user && typeof user === 'object' && user.roles == 0) {
             req.flash('error', '登录失败');
             res.redirect('back');
         } else {
-            req.session.user = user;
-            req.flash('success', '登陆成功');
-            res.redirect('/');
+            if(user.roles != 1){
+                req.flash('error', '登录失败');
+                res.redirect('back');
+            }else{
+                req.session.user = user;
+                req.flash('success', '登陆成功');
+                res.redirect('/');
+            }
         }
     })
 

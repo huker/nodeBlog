@@ -12,6 +12,7 @@ var articles = require('./routes/articles');
 var questions = require('./routes/questions');
 var topics = require('./routes/topics');
 var messages = require('./routes/messages');
+var admin = require('./routes/admin');
 var session=require('express-session');
 var MongoStore=require('connect-mongo')(session);
 var flash = require('connect-flash');
@@ -64,6 +65,7 @@ app.use('/users', users);
 app.use('/articles', articles);
 app.use('/questions', questions);
 app.use('/messages', messages);
+app.use('/admin', admin);
 // app.use('/topics', topics);
 
 //线性执行 上面全没找到的话　就捕获404

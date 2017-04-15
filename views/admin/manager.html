@@ -1,0 +1,36 @@
+<%- include ../include/backheader.html %>
+
+<div class="row">
+    <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" id="admin_nav_tips">
+            <li data-type="sysUser" role="presentation" class="active"><a href="/admin/manage-info">用户管理</a></li>
+            <li data-type="sysArticle" role="presentation"><a href="/admin/sys-article">文章管理</a></li>
+            <li data-type="sysQs" role="presentation"><a href="/admin/sys-qs">问题管理</a></li>
+        </ul>
+    </div>
+    <div class="col-md-10">
+            <table class="table table-bordered">
+                <tr>
+                    <td>序号</td>
+                    <td>用户名</td>
+                    <td>邮箱</td>
+                    <td>操作</td>
+                </tr>
+                <%for(var i=0;i<sys_user.length;i++){
+                var user = sys_user[i];
+                %>
+                <tr data-type="<%=user._id%>">
+                    <td><%=sys_user.length-i%></td>
+                    <td><%=user.username%></td>
+                    <td><%=user.email%></td>
+                    <td><button class="btn btn-danger">删除</button></td>
+                </tr>
+                <%
+                }%>
+            </table>
+    </div>
+</div>
+
+
+<%- include ../include/backfooter.html %>
+
