@@ -3,31 +3,33 @@
 <div class="row">
     <div class="col-md-2">
         <ul class="nav nav-pills nav-stacked" id="admin_nav_tips">
-            <li data-type="sysUser" role="presentation" class="active"><a href="javascript:;">用户管理</a></li>
-            <li data-type="sysArticle" role="presentation"><a href="javascript:;">文章管理</a></li>
-            <li data-type="sysQs" role="presentation"><a href="javascript:;">问题管理</a></li>
+            <li data-type="sysUser" role="presentation"><a href="/admin/manage-info">用户管理</a></li>
+            <li data-type="sysArticle" role="presentation"><a href="/admin/sys-article">文章管理</a></li>
+            <li data-type="sysQs" role="presentation" class="active"><a href="/admin/sys-qs">问题管理</a></li>
         </ul>
     </div>
     <div class="col-md-10">
-            <table class="table table-bordered">
-                <tr>
-                    <td>序号</td>
-                    <td>用户名</td>
-                    <td>邮箱</td>
-                    <td>操作</td>
-                </tr>
-                <%for(var i=0;i<sys_user.length;i++){
-                var user = sys_user[i];
-                %>
-                <tr data-type="<%=user._id%>">
-                    <td><%=sys_user.length-i%></td>
-                    <td><%=user.username%></td>
-                    <td><%=user.email%></td>
-                    <td><button class="btn btn-danger">删除</button></td>
-                </tr>
-                <%
-                }%>
-            </table>
+        <table class="table table-bordered">
+            <tr>
+                <td>序号</td>
+                <td>问题</td>
+                <td>发表人</td>
+                <td>发表日期</td>
+                <td>操作</td>
+            </tr>
+            <%for(var i=0;i<sys_qs.length;i++){
+            var qs = sys_qs[i];
+            %>
+            <tr data-type="<%=qs._id%>">
+                <td><%=(i+1)%></td>
+                <td><%=qs.title%></td>
+                <td><%=qs.user.username%></td>
+                <td><%=(qs.creatAt).toLocaleString()%></td>
+                <td><button data-url="qs" type="button" class="btn btn-danger delbtn">删除</button></td>
+            </tr>
+            <%
+            }%>
+        </table>
     </div>
 </div>
 

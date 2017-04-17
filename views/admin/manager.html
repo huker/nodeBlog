@@ -20,10 +20,10 @@
                 var user = sys_user[i];
                 %>
                 <tr data-type="<%=user._id%>">
-                    <td><%=sys_user.length-i%></td>
+                    <td><%=(i+1)%></td>
                     <td><%=user.username%></td>
                     <td><%=user.email%></td>
-                    <td><button class="btn btn-danger">删除</button></td>
+                    <td><button data-url="user" type="button" class="btn btn-danger delbtn">删除</button></td>
                 </tr>
                 <%
                 }%>

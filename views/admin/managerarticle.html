@@ -21,11 +21,11 @@
                 var article = sys_article[i];
                 %>
                 <tr data-type="<%=article._id%>">
-                    <td><%=sys_article.length-i%></td>
+                    <td><%=(i+1)%></td>
                     <td><%=article.title%></td>
                     <td><%=article.user.username%></td>
                     <td><%=(article.creatAt).toLocaleString()%></td>
-                    <td><button class="btn btn-danger">删除</button></td>
+                    <td><button data-url="article" type="button" class="btn btn-danger delbtn">删除</button></td>
                 </tr>
                 <%
                 }%>
