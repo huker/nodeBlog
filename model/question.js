@@ -12,7 +12,10 @@ var questionSchema = new mongoose.Schema({
         user:{type:mongoose.Schema.Types.ObjectId,ref:'user'},
         creatAt:{type:Date,default:Date.now},
         content:String,
-        up:{type:Number,default:0}
+        up:{type:Number,default:0},
+        upuser:[{
+            user:{type:mongoose.Schema.Types.ObjectId,ref:'user'}
+        }]
     }]
 });
 

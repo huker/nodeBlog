@@ -72,11 +72,23 @@ router.post('/answer',validate.checkLogin,function (req,res) {
             req.flash('error','回答失败');
             res.redirect('back');
         }else{
-            res.redirect('back');
+            res.redirect('/questions/detail/'+req.body._id);
         }
     });
-    asModel.creat()
 });
-
+//点赞
+router.post('/answer-up',validate.checkLogin,function (req, res) {
+    var setdata = {"answers.$.up":req.body.up};
+    qaModel.update({"answers._id":req.body._aid},{$set:setdata},function (err, result) {
+        if(err){
+            req.flash('error','回答失败');
+            res.redirect('back');
+        }else{
+            console.log(result)
+            var data = {"success":true};
+            res.end(JSON.stringify(data));
+        }
+    });
+});
 
 module.exports = router;

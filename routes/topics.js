@@ -7,7 +7,7 @@ var validate=require('../middle/index.js');
 var qaModel = require('../model/question.js');
 var articleModel = require('../model/article.js');
 
-router.get('/',validate.checkLogin,function (req, res) {
+router.get('/',function (req, res) {
     res.render('topic/topicIndex');
 });
 

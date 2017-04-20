@@ -32,7 +32,7 @@
                 %>
                 <article class="clearfix">
                     <div class="post-col">
-                        <button class="vote-btn">
+                        <button class="vote-btn" data-type="<%=answer._id%>">
                             <span><%=answer.up%></span>
                             <i class="fa icon-thumbs-up"></i>
                         </button>
@@ -54,7 +54,7 @@
             <div class="answer-form">
                 <h4>撰写答案</h4>
                 <form action="/questions/answer" method="post" class="clearfix">
-                    <input type="hidden" name="_id" value="<%=qa._id%>">
+                    <input id="qaid" type="hidden" name="_id" value="<%=qa._id%>">
                     <div class="form-group">
                         <textarea class="form-control" name="content" id="content" placeholder="请在此撰写答案..." cols="30" rows="10"></textarea>
                     </div>

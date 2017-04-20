@@ -49,6 +49,10 @@ $(function () {
         }
         center_tip_data(tip, uid);
     })
+    //问答的点赞
+    $('.vote-btn').click(function () {
+        question_answer_up.call(this);
+    })
 });
 // function searchCon() {
 //      console.log('2')
@@ -64,6 +68,22 @@ $(function () {
 //         contentType: 'application/json'
 //     })
 // }
+
+function question_answer_up() {
+    var old_up = $(this).find('span').html();
+    var data = {"_qid":$('#qaid').val(),"_aid":$(this).attr('data-type'),"up":parseInt(old_up)+1};
+    var jsondata = JSON.stringify(data);
+    $.ajax({
+        url: '/questions/answer-up',
+        type: 'POST',
+        data: jsondata,
+        dataType: 'json',
+        contentType: 'application/json',
+        success: function (data) {
+            console.log('ok')
+        }
+    })
+}
 /**
  * 点击修改图标文字变输入框
  * @param ele 当前ele
